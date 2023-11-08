@@ -109,18 +109,39 @@ my_table5_filtered2 = my_table5.filter(lambda x: int(x["ranking"]) < 10)
 my_table5_filtered3 = my_table5.filter(lambda x: int(x["ranking"]) >= 10)
 print("The average number of games played for teams ranking below 10 versus teams ranking above or \
 equal 10 is")
-print(sum([int(x["games"]) for x in my_table5_filtered2.table])/
+print(sum([int(x["games"]) for x in my_table5_filtered2.table]) /
       len([int(x["games"]) for x in my_table5_filtered2.table]), "vs", end=" ")
-print(sum([int(x["games"]) for x in my_table5_filtered3.table])/
+print(sum([int(x["games"]) for x in my_table5_filtered3.table]) /
       len([int(x["games"]) for x in my_table5_filtered3.table]))
 print()
 my_table5_filtered4 = my_table5.filter(lambda x: x["position"] == "forward")
 my_table5_filtered5 = my_table5.filter(lambda x: x["position"] == "midfielder")
 print("The average number of passes made by forwards versus by midfielders is")
-print(sum([int(x["passes"]) for x in my_table5_filtered4.table])/
+print(sum([int(x["passes"]) for x in my_table5_filtered4.table]) /
       len([int(x["passes"]) for x in my_table5_filtered4.table]), "vs", end=" ")
-print(sum([int(x["passes"]) for x in my_table5_filtered5.table])/
+print(sum([int(x["passes"]) for x in my_table5_filtered5.table]) /
       len([int(x["passes"]) for x in my_table5_filtered5.table]))
+print()
+my_table6 = my_DB.search("titanic")
+my_table6_filtered1 = my_table6.filter(lambda x: int(x["class"]) == 1)
+my_table6_filtered2 = my_table6.filter(lambda x: int(x["class"])== 3)
+print("The average fare paid by passengers in the first class versus in the third class is")
+print(sum([float(x["fare"]) for x in my_table6_filtered1.table]) /
+      len([float(x["fare"]) for x in my_table6_filtered1.table]), "vs", end=" ")
+print(sum([float(x["fare"]) for x in my_table6_filtered2.table]) /
+      len([float(x["fare"]) for x in my_table6_filtered2.table]))
+print()
+my_table6_filtered3 = len(my_table6.filter(lambda x: x["gender"] == "M").\
+    filter(lambda x: x["survived"] == "yes").table)
+my_table6_filtered4 = len(my_table6.filter(lambda x: x["gender"] == "M").\
+    filter(lambda x: x["survived"] == "no").table)
+my_table6_filtered5 = len(my_table6.filter(lambda x: x["gender"] == "F").\
+    filter(lambda x: x["survived"] == "yes").table)
+my_table6_filtered6 = len(my_table6.filter(lambda x: x["gender"] == "F").\
+    filter(lambda x: x["survived"] == "no").table)
+print("The survival rate of male versus female passengers is")
+print((my_table6_filtered3/(my_table6_filtered3+my_table6_filtered4)) * 100, end="% vs ")
+print((my_table6_filtered5/(my_table6_filtered5+my_table6_filtered6)) * 100, end="%")
 print()
 # table1 = Table('cities', cities)
 # table2 = Table('countries', countries)
