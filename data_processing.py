@@ -89,6 +89,7 @@ class Table:
     def __str__(self):
         return self.table_name + ':' + str(self.table)
 
+
 table3 = Table('players', players)
 table4 = Table('teams', teams)
 table5 = Table('titanic', titanic)
@@ -132,17 +133,21 @@ print(sum([float(x["fare"]) for x in my_table6_filtered2.table]) /
       len([float(x["fare"]) for x in my_table6_filtered2.table]))
 print()
 my_table6_filtered3 = len(my_table6.filter(lambda x: x["gender"] == "M").\
-    filter(lambda x: x["survived"] == "yes").table)
+                          filter(lambda x: x["survived"] == "yes").table)
 my_table6_filtered4 = len(my_table6.filter(lambda x: x["gender"] == "M").\
-    filter(lambda x: x["survived"] == "no").table)
+                          filter(lambda x: x["survived"] == "no").table)
 my_table6_filtered5 = len(my_table6.filter(lambda x: x["gender"] == "F").\
-    filter(lambda x: x["survived"] == "yes").table)
+                          filter(lambda x: x["survived"] == "yes").table)
 my_table6_filtered6 = len(my_table6.filter(lambda x: x["gender"] == "F").\
-    filter(lambda x: x["survived"] == "no").table)
+                          filter(lambda x: x["survived"] == "no").table)
 print("The survival rate of male versus female passengers is")
 print((my_table6_filtered3/(my_table6_filtered3+my_table6_filtered4)) * 100, end="% vs ")
 print((my_table6_filtered5/(my_table6_filtered5+my_table6_filtered6)) * 100, end="%")
 print()
+print()
+my_table6_filtered7 = len(my_table6.filter(lambda x: x["gender"] == "M").\
+                          filter(lambda x: x["embarked"] == "Southampton").table)
+print(f"""The total number of male passengers embarked at Southampton is {my_table6_filtered7}""")
 # table1 = Table('cities', cities)
 # table2 = Table('countries', countries)
 # my_DB = DB()
